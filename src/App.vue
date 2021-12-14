@@ -1,14 +1,16 @@
 <template>
   <navbar></navbar>
+  <CategoryList></CategoryList>
   <router-view/>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar'
+import CategoryList from '@/components/CategoryList'
 
 export default {
   name: 'App',
-  components: { Navbar }
+  components: { Navbar, CategoryList }
 }
 </script>
 

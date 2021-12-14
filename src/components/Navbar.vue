@@ -9,16 +9,6 @@
         <ul class="navbar-nav">
           <router-link class="nav-link" to="/">Home</router-link>
           <router-link class="nav-link" to="/about">About</router-link>
-
-          <!--          <li class="nav-item">-->
-<!--            <a class="nav-link active" aria-current="page" href="#">Home</a>-->
-<!--          </li>-->
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link" href="#">About</a>-->
-<!--          </li>-->
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link" href="#">Pricing</a>-->
-<!--          </li>-->
         </ul>
       </div>
     </div>
