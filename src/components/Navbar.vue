@@ -1,15 +1,20 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Shareconomy</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <router-link class="nav-link" to="/">Home</router-link>
-          <router-link class="nav-link" to="/about">About</router-link>
-        </ul>
+  <nav className="navbar navbar-light bg-light">
+    <div className="container-xxl d-flex align-items-md-center">
+      <a className="navbar-brand">Shareconomy</a>
+      <form className="d-flex">
+        <input className="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
+        <button className="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <form className="d-flex">
+        <input className="form-control me-2" type="search" placeholder="Postleitzahl" aria-label="Search">
+        <button className="btn btn-outline-success" type="submit">Search</button>
+      </form>
+      <div v-if="guest">
+        <a className="btn btn-primary" href="#" role="button">Login</a>
+      </div>
+      <div v-else>
+        <a className="btn btn-primary" href="#" role="button">User</a>
       </div>
     </div>
   </nav>
@@ -17,7 +22,9 @@
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  data: function () {
+  }
 }
 </script>
 

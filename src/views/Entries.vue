@@ -9,6 +9,7 @@
             In {{ entry.zipcode}} gibt es einen schönen {{ entry.titel}}.
             Angeboten von {{ entry.user.firstName }} {{ entry.user.lastName }}
           </p>
+          <a href="#" class="stretched-link"></a>
         </div>
       </div>
     </div>
