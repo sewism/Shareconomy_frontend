@@ -3,4 +3,3 @@
 
 ## Frontend des Shareconomy WebTech-Projekt
 von Adrian Franz
-
