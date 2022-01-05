@@ -56,7 +56,14 @@
               Please provide a valid zip.
             </div>
           </div>
-          <div class="col-md-12">
+          <div class="col-md-8">
+            <label for="upload" class="form-label">Foto</label>
+            <input @input="handleImage" class="form-control" type="file" accept="image/*" id="upload" required>
+          </div>
+          <div class="col-md-4">
+            <img style="" :src="image" alt="">
+          </div>
+          <div class="col-md-4">
             <label for="description" class="form-label">Beschreibung</label>
             <div class="input-group">
               <textarea type="text" class="form-control" aria-label="With textarea" id="description" v-model="description" required></textarea>
@@ -74,6 +81,7 @@
 </template>
 
 <script>
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 export default {
   name: 'NewEntry',
   data () {
@@ -85,6 +93,9 @@ export default {
       category: '',
       zipcode: '',
       description: '',
+      image: null,
+      imageFile: null,
+      imageURL: '',
       userId: '',
       serverValidationMessages: []
     }
@@ -123,8 +134,7 @@ export default {
 
         const headers = new Headers()
         headers.append('Content-Type', 'application/json')
-
-        const user = JSON.stringify({
+        const entry = JSON.stringify({
           titel: this.titel,
           timestamp: new Date(),
           category: this.category.toUpperCase(),
@@ -137,12 +147,13 @@ export default {
         const requestOptions = {
           method: 'POST',
           headers: headers,
-          body: user,
+          body: entry,
           redirect: 'follow'
         }
 
         const response = await fetch(endpoint, requestOptions)
         await this.handleEntryResponse(response)
+        if (response.ok) await this.uploadImage()
       }
     },
     handleEntryResponse: async function (response) {
@@ -175,10 +186,39 @@ export default {
       const form = document.getElementById('user-create-form')
       form.classList.add('was-validated')
       return form.checkValidity()
+    },
+    handleImage (e) {
+      const selectedImage = e.target.files[0]
+      this.imageFile = selectedImage
+      this.createImageURL(selectedImage)
+    },
+    createImageURL (fileObject) {
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        this.image = e.target.result
+      }
+      reader.readAsDataURL(fileObject)
+    },
+    uploadImage () {
+      const storage = getStorage()
+      const storageRef = ref(storage, `${this.imageFile.name}`)
+      uploadBytes(storageRef, this.imageFile)
+        .then(() => {
+          console.log('Image uploaded: ', storageRef)
+        })
+        .then(() => {
+          getDownloadURL(storageRef).then((url) => {
+            this.imageURL = url
+            console.log(this.imageURL)
+          })
+        })
+        .catch(e => {
+          console.log(e)
+        })
     }
   }
 }
 </script>
-
 <style scoped>
+img{width: 17rem;}
 </style>

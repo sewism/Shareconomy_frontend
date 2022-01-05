@@ -32,7 +32,7 @@
                   In {{ entry.zipcode }} gibt es einen schönen {{ entry.titel }}.
                   Angeboten von {{ entry.user.firstName }} {{ entry.user.lastName }}
                 </p>
-                <router-link class="stretched-link" to="/entry"></router-link>
+                <router-link class="stretched-link" to="/entry?"></router-link>
               </div>
             </div>
           </div>

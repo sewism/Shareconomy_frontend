@@ -1,12 +1,18 @@
 <template>
-  <entry entry="Besen"></entry>
+<h1>Test</h1>
 </template>
 
 <script>
-import Entry from '@/views/Entry'
 
 export default {
   name: 'EntryTest',
-  components: { Entry }
+  data: function () {
+    return {
+      entries: []
+    }
+  },
+  props: {
+    entry: Object
+  }
 }
 </script>
