@@ -25,7 +25,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="col" v-for="entry in entriesFiltered" :key="entry.id">
             <div class="card h-100">
-              <img src="../assets/hammer2.jpg" class="card-img-top" :alt="entry.titel">
+              <img :src="entry.imageURL" class="card-img-top" :alt="entry.titel">
               <div class="card-body">
                 <h5 class="card-title">{{ entry.titel }}</h5>
                 <p class="card-text">

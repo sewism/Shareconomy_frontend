@@ -61,7 +61,7 @@
             <input @input="handleImage" class="form-control" type="file" accept="image/*" id="upload" required>
           </div>
           <div class="col-md-4">
-            <img style="" :src="image" alt="">
+            <img style="" :src="image" width="900" height="1200"  alt="">
           </div>
           <div class="col-md-4">
             <label for="description" class="form-label">Beschreibung</label>
@@ -140,6 +140,7 @@ export default {
           category: this.category.toUpperCase(),
           zipcode: this.zipcode,
           description: this.description,
+          imageURL: this.imageURL,
           userId: this.userId
 
         })
@@ -153,7 +154,6 @@ export default {
 
         const response = await fetch(endpoint, requestOptions)
         await this.handleEntryResponse(response)
-        if (response.ok) await this.uploadImage()
       }
     },
     handleEntryResponse: async function (response) {
@@ -191,6 +191,7 @@ export default {
       const selectedImage = e.target.files[0]
       this.imageFile = selectedImage
       this.createImageURL(selectedImage)
+      this.uploadImage()
     },
     createImageURL (fileObject) {
       const reader = new FileReader()
