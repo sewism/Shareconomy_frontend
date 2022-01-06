@@ -73,7 +73,9 @@
             </div>
           </div>
           <div class="col-12">
-            <button class="btn btn-primary" type="submit" @click.prevent="createUser">Submit form</button>
+            <button class="btn btn-primary" type="submit" @click.prevent="createUser" :to="{path:'/entry', query:{firstName: firstName, lastName: lastName,
+                             email: email, titel: titel, category: category, zipcode: zipcode,
+                             description: description, imageURL: imageURL}}">Submit form</button>
           </div>
         </form>
       </div>

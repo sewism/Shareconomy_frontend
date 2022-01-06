@@ -7,7 +7,7 @@ import { initializeApp } from 'firebase/app'
 import { getStorage } from 'firebase/storage'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyB1ZF87pC0X-wXcq2stCSKtXbNMxatTZ8Y',
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
   authDomain: 'shareconomy-1da5b.firebaseapp.com',
   databaseURL: 'gs://shareconomy-1da5b.appspot.com',
   projectId: 'shareconomy-1da5b',

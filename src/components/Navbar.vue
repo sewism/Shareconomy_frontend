@@ -1,7 +1,7 @@
 <template>
   <nav className="navbar navbar-light bg-light">
     <div className="container-xxl d-flex align-items-md-center">
-      <router-link class="navbar-brand" to="/">Shareconomy</router-link>
+      <a class="navbar-brand" href="/">Shareconomy</a>
       <form className="d-flex">
         <router-link to="/new">
         <a className="btn btn-primary" href="#" role="button">
@@ -12,20 +12,6 @@
           Inserat erstellen</a>
         </router-link>
       </form>
-      <form className="d-flex">
-        <input className="form-control me-2" type="search" placeholder="Suche" aria-label="Search">
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <form className="d-flex">
-        <input className="form-control me-2" type="search" placeholder="Postleitzahl" aria-label="Search">
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
-<!--      <div v-if="guest">-->
-<!--        <a className="btn btn-primary" href="#" role="button">Login</a>-->
-<!--      </div>-->
-<!--      <div v-else>-->
-<!--        <a className="btn btn-primary" href="#" role="button">User</a>-->
-<!--      </div>-->
     </div>
   </nav>
 </template>

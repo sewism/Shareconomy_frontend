@@ -2,6 +2,10 @@
   <div className="container-fluid">
     <div className="row flex-xl-nowrap">
       <div className="col-12 col-md-3 col-xl-2 bd-sidebar">
+        <form className="d-flex">
+          <input className="form-control me-2" type="search" placeholder="Suche" id="search" v-model="searchQueryString" aria-label="Search">
+          <button className="btn btn-outline-success" type="submit" @click.prevent="searchQuery">Search</button>
+        </form>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <button @click="selectedCat = 'AUTO'" class="btn d-inline-flex align-items-center">Auto</button></li>
@@ -32,7 +36,11 @@
                   In {{ entry.zipcode }} gibt es einen schönen {{ entry.titel }}.
                   Angeboten von {{ entry.user.firstName }} {{ entry.user.lastName }}
                 </p>
-                <router-link class="stretched-link" to="/entry?"></router-link>
+                <router-link class="stretched-link"
+                             :to="{path:'/entry', query:{firstName: entry.user.firstName, lastName: entry.user.lastName,
+                             email: entry.user.email, titel: entry.titel, category: entry.category, zipcode: entry.zipcode,
+                             description: entry.description, imageURL: entry.imageURL}}">
+                </router-link>
               </div>
             </div>
           </div>
@@ -48,16 +56,36 @@ export default {
   data: function () {
     const selectedCat = null
     return {
-      entries: [], selectedCat
+      entries: [],
+      selectedCat,
+      searchQueryString: ''
     }
   },
   computed: {
     entriesFiltered: function () {
       if (this.selectedCat === null) {
         return this.entries
+      // } else if (this.searchQueryString !== '') {
+      //   return this.entries.filter(entry => {
+      //     entry.title.includes(this.searchQueryString) || entry.description.includes(this.searchQueryString)
+      //   })
       } else {
         return this.entries.filter(entry => !entry.category.indexOf(this.selectedCat))
       }
+    }
+    // ,
+    // entriesSearched: function () {
+    //   return (this.entries.filter(entry => {
+    //     entry.title.includes(this.searchQueryString) || entry.description.includes(this.searchQueryString)
+    //     // entry.title.toLowerCase().includes(this.searchQueryString.toLowerCase()) || entry.description.toLowerCase().includes(this.searchQueryString.toLowerCase())
+    //   }), console.log('before', this.entries))
+    // }
+  },
+  methods: {
+    searchQuery: function () {
+      this.entries = this.entries.filter(entry => {
+        if (entry.titel.toLowerCase().includes(this.searchQueryString) || entry.description.toLowerCase().includes(this.searchQueryString)) return entry
+      })
     }
   },
   mounted () {
