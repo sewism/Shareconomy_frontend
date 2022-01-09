@@ -6,31 +6,27 @@
           <div class="col-md-4">
             <label for="firstName" class="form-label">Vorname</label>
             <input type="text" class="form-control" id="firstName" v-model="firstName" placeholder="Mark" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
+            <div class="valid-feedback">ok!</div>
+            <div class="invalid-feedback">Bitte ausfüllen!</div>
           </div>
           <div class="col-md-4">
             <label for="lastName" class="form-label">Nachname</label>
             <input type="text" class="form-control" id="lastName" v-model="lastName" placeholder="Otto" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
+            <div class="valid-feedback">ok!</div>
+            <div class="invalid-feedback">Bitte ausfüllen!</div>
           </div>
           <div class="col-md-4">
             <label for="mail" class="form-label">Email</label>
             <input type="text" class="form-control" id="mail" v-model="email" placeholder="markotto@gmail.com" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
+            <div class="valid-feedback">ok!</div>
+            <div class="invalid-feedback">Bitte ausfüllen!</div>
           </div>
           <h2>Bitte Trage dein Inserat ein.</h2>
           <div class="col-md-4">
             <label for="titel" class="form-label">Titel</label>
             <input type="text" class="form-control" id="titel" v-model="titel" placeholder="Hose" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
+            <div class="valid-feedback">ok!</div>
+            <div class="invalid-feedback">Bitte ausfüllen!</div>
           </div>
           <div class="col-md-4">
             <label for="category" class="form-label">Kategorie</label>
@@ -45,16 +41,13 @@
               <option>Medien</option>
               <option>Ramsch</option>
             </select>
-            <div class="invalid-feedback">
-              Please select a valid state.
-            </div>
+            <div class="invalid-feedback">Bitte eine Kategorie auswählen!</div>
           </div>
           <div class="col-md-4">
             <label for="zipcode" class="form-label">Postleitzahl</label>
             <input type="text" class="form-control" placeholder="000000" id="zipcode" v-model="zipcode" required>
-            <div class="invalid-feedback">
-              Please provide a valid zip.
-            </div>
+            <div class="valid-feedback">ok!</div>
+            <div class="invalid-feedback">Bitte ausfüllen!</div>
           </div>
           <div class="col-md-8">
             <label for="upload" class="form-label">Foto</label>
@@ -67,9 +60,8 @@
             <label for="description" class="form-label">Beschreibung</label>
             <div class="input-group">
               <textarea type="text" class="form-control" aria-label="With textarea" id="description" v-model="description" required></textarea>
-            </div>
-            <div class="valid-feedback">
-              Looks good!
+              <div class="valid-feedback">ok!</div>
+              <div class="invalid-feedback">Bitte ausfüllen!</div>
             </div>
           </div>
           <div class="col-12">
