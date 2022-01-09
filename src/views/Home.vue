@@ -28,7 +28,7 @@
       <main className="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
         <div class="row row-cols-1 row-cols-md-3 g-4">
           <div class="col" v-for="entry in entriesFiltered" :key="entry.id">
-            <div class="card h-100">
+            <div class="entry-card">
               <img :src="entry.imageURL" class="card-img-top" :alt="entry.titel">
               <div class="card-body">
                 <h5 class="card-title">{{ entry.titel }}</h5>
@@ -65,21 +65,10 @@ export default {
     entriesFiltered: function () {
       if (this.selectedCat === null) {
         return this.entries
-      // } else if (this.searchQueryString !== '') {
-      //   return this.entries.filter(entry => {
-      //     entry.title.includes(this.searchQueryString) || entry.description.includes(this.searchQueryString)
-      //   })
       } else {
         return this.entries.filter(entry => !entry.category.indexOf(this.selectedCat))
       }
     }
-    // ,
-    // entriesSearched: function () {
-    //   return (this.entries.filter(entry => {
-    //     entry.title.includes(this.searchQueryString) || entry.description.includes(this.searchQueryString)
-    //     // entry.title.toLowerCase().includes(this.searchQueryString.toLowerCase()) || entry.description.toLowerCase().includes(this.searchQueryString.toLowerCase())
-    //   }), console.log('before', this.entries))
-    // }
   },
   methods: {
     searchQuery: function () {
@@ -101,6 +90,7 @@ export default {
         this.entries.push(entry)
       }))
       .catch(error => console.log('error', error))
+    this.entries = this.entries.reverse()
   }
 }
 </script>
