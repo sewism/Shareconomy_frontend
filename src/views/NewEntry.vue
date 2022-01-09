@@ -97,15 +97,13 @@ export default {
       image: null,
       imageFile: null,
       imageURL: '',
-      userId: '',
-      serverValidationMessages: []
+      userId: ''
     }
   },
   emits: ['created'],
   methods: {
 
     async createUser () {
-      console.log('createUser')
       if (this.validate()) {
         const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + 'api/v1/users'
 
@@ -131,7 +129,6 @@ export default {
       }
     },
     async createEntry () {
-      console.log('createEntry')
       if (this.validate()) {
         const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + 'api/v1/entries'
 
@@ -156,22 +153,22 @@ export default {
         }
 
         const response = await fetch(endpoint, requestOptions)
-        await this.handleEntryResponse(response)
         if (response.ok) {
-          router.push({ path: '/entry', query: { firstName: this.firstName, lastName: this.lastName, email: this.email, titel: this.titel, category: this.category, zipcode: this.zipcode, description: this.description, imageURL: this.imageURL, new: true } })
+          await router.push({
+            path: '/entry',
+            query: {
+              firstName: this.firstName,
+              lastName: this.lastName,
+              email: this.email,
+              titel: this.titel,
+              category: this.category,
+              zipcode: this.zipcode,
+              description: this.description,
+              imageURL: this.imageURL,
+              new: true
+            }
+          })
         }
-      }
-    },
-    handleEntryResponse: async function (response) {
-      if (response.ok) {
-        this.$emit('created', response.headers.get('location'))
-      } else if (response.status === 400) {
-        response = await response.json()
-        response.errors.forEach(error => {
-          this.serverValidationMessages.push(error.defaultMessage)
-        })
-      } else {
-        this.serverValidationMessages.push('Unknown error occurred')
       }
     },
     handleUserResponse: async function (response) {
@@ -179,13 +176,6 @@ export default {
         const location = response.headers.get('location')
         this.$emit('created', location)
         this.userId = location.match(/[0-9.]+$/).toString()
-      } else if (response.status === 400) {
-        response = await response.json()
-        response.errors.forEach(error => {
-          this.serverValidationMessages.push(error.defaultMessage)
-        })
-      } else {
-        this.serverValidationMessages.push('Unknown error occurred')
       }
     },
     validate () {
