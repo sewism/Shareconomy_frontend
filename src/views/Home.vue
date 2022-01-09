@@ -33,7 +33,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ entry.titel }}</h5>
                 <p class="card-text">
-                  In {{ entry.zipcode }} gibt es einen schönen {{ entry.titel }}.
+                  In {{ entry.zipcode }} gibt es {{ entry.titel }}.
                   Angeboten von {{ entry.user.firstName }} {{ entry.user.lastName }}
                 </p>
                 <router-link class="stretched-link"
