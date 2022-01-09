@@ -22,12 +22,14 @@
         </div>
       </div>
   </div>
+  <Toast v-if="this.new"></Toast>
 </template>
 
 <script>
-
+import Toast from '@/components/Toast'
 export default {
   name: 'Entry',
+  components: { Toast },
   data: function () {
     return {
       firstName: '',
@@ -37,7 +39,8 @@ export default {
       category: '',
       zipcode: '',
       description: '',
-      imageURL: ''
+      imageURL: '',
+      new: false
     }
   },
   mounted () {
@@ -50,6 +53,7 @@ export default {
     this.zipcode = urlParams.get('zipcode')
     this.description = urlParams.get('description')
     this.imageURL = urlParams.get('imageURL')
+    this.new = urlParams.get('new')
   }
 }
 </script>

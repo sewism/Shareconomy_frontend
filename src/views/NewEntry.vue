@@ -61,7 +61,7 @@
             <input @input="handleImage" class="form-control" type="file" accept="image/*" id="upload" required>
           </div>
           <div class="col-md-4">
-            <img style="" :src="image" width="900" height="1200"  alt="">
+            <img style="" :src="image" alt="">
           </div>
           <div class="col-md-4">
             <label for="description" class="form-label">Beschreibung</label>
@@ -73,9 +73,7 @@
             </div>
           </div>
           <div class="col-12">
-            <button class="btn btn-primary" type="submit" @click.prevent="createUser" :to="{path:'/entry', query:{firstName: firstName, lastName: lastName,
-                             email: email, titel: titel, category: category, zipcode: zipcode,
-                             description: description, imageURL: imageURL}}">Submit form</button>
+            <button class="btn btn-primary" type="submit" @click.prevent="createUser">Submit form</button>
           </div>
         </form>
       </div>
@@ -84,6 +82,7 @@
 
 <script>
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import router from '@/router'
 export default {
   name: 'NewEntry',
   data () {
@@ -106,6 +105,7 @@ export default {
   methods: {
 
     async createUser () {
+      console.log('createUser')
       if (this.validate()) {
         const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + 'api/v1/users'
 
@@ -131,6 +131,7 @@ export default {
       }
     },
     async createEntry () {
+      console.log('createEntry')
       if (this.validate()) {
         const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + 'api/v1/entries'
 
@@ -156,6 +157,9 @@ export default {
 
         const response = await fetch(endpoint, requestOptions)
         await this.handleEntryResponse(response)
+        if (response.ok) {
+          router.push({ path: '/entry', query: { firstName: this.firstName, lastName: this.lastName, email: this.email, titel: this.titel, category: this.category, zipcode: this.zipcode, description: this.description, imageURL: this.imageURL, new: true } })
+        }
       }
     },
     handleEntryResponse: async function (response) {
